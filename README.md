@@ -7,8 +7,8 @@ Visitor's Journey, e-ticaret siteleri ve dijital platformlar için geliştirilmi
 * **🧠 Akıllı Tahminleme:** XGBoost, Random Forest ve Neural Network gibi güçlü algoritmalarla ziyaretçi verilerini analiz eder.
 * **📊 Dinamik Metrik Takibi:** Hemen çıkma oranı, sayfa değeri ve oturum süreleri gibi kritik verilerin takibi.
 * **💻 Modern Geliştirici Konsolu:** Gerçek zamanlı sistem durumunu gösteren interaktif terminal arayüzü.
-* **🎨 Üst Düzey Kullanıcı Deneyimi (UX):** Glassmorphism (cam dokusu) tasarımı, akıcı animasyonlar ve projenin ruhuna uygun dinamik yılbaşı süslemeleri.
-* **📱 Responsive Tasarım:** Tüm cihazlarla uyumlu Bootstrap 5 tabanlı arayüz.
+* **🎨Kullanıcı Deneyimi (UX):** Glassmorphism (cam dokusu) tasarımı, akıcı animasyonlar ve projenin ruhuna uygun dinamik yılbaşı süslemeleri.
+
 
 ## 🎄 Özel UI Detayları
 Proje, kış sezonuna özel olarak tasarlanmış, ekranın sağ alt köşesine sabitlenmiş **neon ışıklı, cam dokulu ve üzerine kar yağan** interaktif bir yılbaşı ağacı süslemesi içerir. Bu detay, modern AI atmosferini samimi bir kullanıcı deneyimi ile birleştirir.
