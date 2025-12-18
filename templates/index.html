@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="tr" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Visitor's Journey | Modern Müşteri Analiz Sistemi</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Anime.js for SVG animations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+    <div class="grid-pattern"></div>
+
+    <!-- Navigation -->
+   <nav class="navbar navbar-expand-lg navbar-glass fixed-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+            <div class="logo-icon pulse-animation">
+                <i class="fas fa-brain"></i>
+            </div>
+            
+            <div class="visitor-logo-container" style="width: 220px; height: 40px;">
+                <svg viewBox="0 0 250 50" preserveAspectRatio="xMinYMid meet">
+                    <defs>
+                        <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#3b82f6" />
+                            <stop offset="50%" stop-color="#8b5cf6" />
+                            <stop offset="100%" stop-color="#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <text x="0" y="35" font-family="'Poppins', sans-serif" font-weight="700" font-size="28" fill="none" stroke="url(#textGradient)" stroke-width="1.5" class="drawing-text">
+                        Visitor Journey
+                    </text>
+                    
+                    <text x="0" y="35" font-family="'Poppins', sans-serif" font-weight="700" font-size="28" fill="url(#textGradient)" class="fill-text">
+                        Visitor Journey
+                    </text>
+                </svg>
+            </div>
+        </a>
+    </div>
+</nav>
+
+    <!-- Main Content -->
+    <div class="container pt-4 mt-5">
+        <div class="row g-3">
+            <!-- Left Panel -->
+          <!-- Left Panel -->
+<div class="col-lg-8">
+    <!-- Davranış Analiz Modülü - Yeni Tasarım -->
+    <div class="behavior-module-card mb-3" data-aos="fade-up">
+        <span class="card__title">Davranış Analiz Modülü</span>
+        <p class="card__content">Müşteri etkileşim metriklerini girerek satın alma tahmini yapın</p>
+        
+        <form class="card__form" id="analizForm">
+            <!-- Zaman Metrikleri Bölümü -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-clock"></i>
+                    <span>Zaman Metrikleri</span>
+                </div>
+                
+               <div class="mb-3">
+    <label class="form-label">İdari Süre (sn)</label>
+    <div class="custom-stepper">
+        <button type="button" class="stepper-btn down" onclick="this.parentNode.querySelector('input').stepDown()">
+            <i class="fas fa-minus"></i>
+        </button>
+        <input type="number" name="admin" class="form-control stepper-input" value="0" min="0" required>
+        <button type="button" class="stepper-btn up" onclick="this.parentNode.querySelector('input').stepUp()">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+</div>
+                
+                <div class="mb-3">
+    <label class="form-label">Bilgi Süresi (sn)</label>
+    <div class="custom-stepper">
+        <button type="button" class="stepper-btn down" onclick="this.parentNode.querySelector('input').stepDown()">
+            <i class="fas fa-minus"></i>
+        </button>
+        <input type="number" name="admin" class="form-control stepper-input" value="0" min="0" required>
+        <button type="button" class="stepper-btn up" onclick="this.parentNode.querySelector('input').stepUp()">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+</div>
+         
+                 <div class="mb-3">
+    <label class="form-label">Ürün Sayfası (sn)</label>
+    <div class="custom-stepper">
+        <button type="button" class="stepper-btn down" onclick="this.parentNode.querySelector('input').stepDown()">
+            <i class="fas fa-minus"></i>
+        </button>
+        <input type="number" name="admin" class="form-control stepper-input" value="0" min="100" required>
+        <button type="button" class="stepper-btn up" onclick="this.parentNode.querySelector('input').stepUp()">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+</div>
+         
+            </div>
+
+            <!-- Davranış Metrikleri Bölümü -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Davranış Metrikleri</span>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <label class="form-label mb-0">Hemen Çıkma Oranı</label>
+                        <span class="badge bg-dark text-primary px-2 py-1" id="val-bounce">0.01</span>
+                    </div>
+                    <input type="range" name="bounce" class="range-slider" 
+                           min="0" max="1" step="0.01" value="0.01">
+                    <small class="text-secondary mt-1 d-block">
+                        <i class="fas fa-level-down-alt me-1"></i>
+                        Siteye girip etkileşimsiz çıkanların oranı
+                    </small>
+                </div>
+                
+                <div>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <label class="form-label mb-0">Çıkış Oranı</label>
+                        <span class="badge bg-dark text-primary px-2 py-1" id="val-exit">0.02</span>
+                    </div>
+                    <input type="range" name="exit" class="range-slider" 
+                           min="0" max="1" step="0.01" value="0.02">
+                    <small class="text-secondary mt-1 d-block">
+                        <i class="fas fa-sign-out-alt me-1"></i>
+                        Sayfadan siteyi terk edenlerin oranı
+                    </small>
+                </div>
+            </div>
+
+            <!-- Değer Metrikleri Bölümü -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-gem"></i>
+                    <span>Değer Metrikleri</span>
+                </div>
+                
+                <div>
+                    <label class="form-label">Sayfa Değeri (PageValues)</label>
+                    <div class="input-group">
+                        <input type="number" name="page_value" class="form-control" 
+                               placeholder="0" value="0" step="0.01" required>
+                        <button type="button" class="btn btn-dark border-start-0" 
+                                data-bs-toggle="tooltip" 
+                                title="Sayfanın işlem değerine katkısını belirtir">
+                            <i class="fas fa-question-circle text-secondary"></i>
+                        </button>
+                    </div>
+                    <small class="text-secondary mt-1 d-block">
+                        <i class="fas fa-money-check-alt me-1"></i>
+                        Sayfanın işlem değerine katkısı
+                    </small>
+                </div>
+            </div>
+
+            <!-- Analiz Butonu -->
+            <button type="submit" class="card__button mt-2">
+                <i class="fas fa-play me-2"></i>
+                Analizi Başlat
+            </button>
+        </form>
+    </div>
+
+</div>
+            <!-- Right Panel -->
+            <div class="col-lg-4">
+           <div class="hanging-card-container" data-aos="fade-down">
+    <div class="lanyard">
+        <div class="lanyard-rope"></div>
+        <div class="lanyard-clip"></div>
+    </div>
+    <div class="ai-id-card">
+        <div class="card-top-hole"></div>
+        <div class="ai-avatar-container">
+            <div class="ai-glow-effect"></div>
+            <img src="{{ url_for('static', filename='cody.png') }}" alt="AI Assistant" class="ai-img">
+        </div>
+        <div class="card-info">
+            <h4 class="card-title-mini">Journey AI</h4>
+            <div class="status-badge">
+                <span class="dot pulse-dot"></span> ANALİZ EDİYOR
+            </div>
+            <p class="small-text-mini">Sizin için sürekli öğreniyor...</p>
+        </div>
+   
+    </div>
+</div>
+               <!-- Algorithm Info - Yeni Slider Tasarımı -->
+<div class="algorithm-slider-container glass-card-hover" data-aos="fade-left" data-aos-delay="100">
+    <!-- Particles Background -->
+    <div id="algorithm-particles"></div>
+    
+    <div class="algorithm-content">
+        <h1>AI Algoritma Mimarisi</h1>
+        <p>
+            Gelişmiş makine öğrenimi modellerimiz, müşteri davranışlarını analiz ederek 
+            yüksek doğrulukla satın alma tahminleri yapar. Her algoritma özel olarak 
+            optimize edilmiş performans sunar.
+        </p>
+  
+    </div>
+
+    <div class="algorithm-swiper swiper">
+        <div class="swiper-wrapper">
+            <!-- Random Forest Slide -->
+            <div class="swiper-slide algorithm-swiper-slide">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                     alt="Random Forest">
+                <div class="algorithm-cost">%88 Doğruluk</div>
+                <div class="algorithm-overlay">
+                    <h1>Random Forest</h1>
+                    <p>
+                        Birden fazla karar ağacı ile oluşturulmuş ensemble modeli, 
+                        yüksek doğruluk ve overfitting'e karşı direnç sunar.
+                    </p>
+                    <div class="algorithm-ratings">
+                        <div class="algorithm-stars">
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star-half-outline"></ion-icon>
+                        </div>
+                 
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Neural Network Slide -->
+            <div class="swiper-slide algorithm-swiper-slide">
+                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                     alt="Neural Network">
+                <div class="algorithm-cost">%91 Doğruluk</div>
+                <div class="algorithm-overlay">
+                    <h1>Neural Network</h1>
+                    <p>
+                        Derin öğrenme tabanlı sinir ağı, kompleks pattern'ları 
+                        tespit ederek en gelişmiş tahminleri yapar.
+                    </p>
+                    <div class="algorithm-ratings">
+                        <div class="algorithm-stars">
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+            
+            <!-- XGBoost Slide -->
+            <div class="swiper-slide algorithm-swiper-slide">
+                <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                     alt="XGBoost">
+                <div class="algorithm-cost algorithm-dark-text">%94 Doğruluk</div>
+                <div class="algorithm-overlay">
+                    <h1>XGBoost</h1>
+                    <p>
+                        Gradient boosting algoritması, hızlı ve yüksek performanslı 
+                        tahminler için optimize edilmiş en güncel modeldir.
+                    </p>
+                    <div class="algorithm-ratings">
+                        <div class="algorithm-stars">
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star-half-outline"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SVM Slide -->
+            <div class="swiper-slide algorithm-swiper-slide">
+                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                     alt="SVM">
+                <div class="algorithm-cost">%85 Doğruluk</div>
+                <div class="algorithm-overlay">
+                    <h1>Support Vector Machine</h1>
+                    <p>
+                        Yüksek boyutlu uzayda optimal hiperdüzlem oluşturarak 
+                        sınıflandırma problemlerinde etkili çözüm sunar.
+                    </p>
+                    <div class="algorithm-ratings">
+                        <div class="algorithm-stars">
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star"></ion-icon>
+                            <ion-icon class="algorithm-star" name="star-outline"></ion-icon>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation buttons -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+
+                <!-- Performance Stats -->
+           
+<div class="fluid-glass-card p-4 glass-card-hover" data-aos="fade-left" data-aos-delay="200">
+    <div class="fluid-glass-inner">
+        <!-- Fluid glass arkaplan efektleri -->
+        <div class="fluid-glass-bubbles">
+            <div class="fluid-bubble bubble-1"></div>
+            <div class="fluid-bubble bubble-2"></div>
+            <div class="fluid-bubble bubble-3"></div>
+        </div>
+        
+        <!-- Başlık -->
+        <div class="d-flex align-items-center mb-4">
+            <div class="fluid-icon-container me-3">
+                <i class="fas fa-chart-network text-gradient"></i>
+            </div>
+            <h4 class="h5 mb-0 fluid-title">
+                Sistem Performansı
+            </h4>
+        </div>
+        
+        <!-- Performans Metrikleri -->
+        <div class="row g-4">
+            <!-- Doğruluk Kartı -->
+            <div class="col-6">
+                <div class="fluid-metric-card">
+                    <!-- Progress Ring -->
+                    <div class="fluid-progress-ring-container">
+                        <svg class="fluid-progress-ring" width="100" height="100">
+                            <!-- Arkaplan dairesi -->
+                            <circle cx="50" cy="50" r="40" 
+                                    fill="transparent" 
+                                    stroke="rgba(255, 255, 255, 0.1)" 
+                                    stroke-width="8" />
+                            <!-- Progress dairesi -->
+                            <circle class="fluid-progress-circle" 
+                                    cx="50" cy="50" r="40" 
+                                    fill="transparent" 
+                                    stroke="url(#accuracy-gradient)" 
+                                    stroke-width="8" 
+                                    stroke-linecap="round"
+                                    stroke-dasharray="251.2"
+                                    stroke-dashoffset="calc(251.2 - (251.2 * 88) / 100)"
+                                    transform="rotate(-90 50 50)" />
+                            <!-- Gradient tanımı -->
+                            <defs>
+                                <linearGradient id="accuracy-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#22c55e" />
+                                    <stop offset="50%" stop-color="#3b82f6" />
+                                    <stop offset="100%" stop-color="#8b5cf6" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        
+                        <!-- Ortadaki yüzde değeri -->
+                        <div class="fluid-progress-value">
+                            <span class="fluid-percentage">88%</span>
+                        </div>
+                        
+                        <!-- Halka içi glow efekti -->
+                        <div class="fluid-progress-glow glow-accuracy"></div>
+                    </div>
+                    
+                    <!-- Metrik bilgisi -->
+                    <div class="fluid-metric-info text-center mt-3">
+                        <div class="fluid-metric-label">
+                            <i class="fas fa-bullseye me-2 text-success"></i>
+                            <span class="fluid-label">Doğruluk</span>
+                        </div>
+                        <p class="fluid-metric-desc small">
+                            Model skoru
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Karar Kalitesi Kartı -->
+            <div class="col-6">
+                <div class="fluid-metric-card">
+                    <!-- Progress Ring -->
+                    <div class="fluid-progress-ring-container">
+                        <svg class="fluid-progress-ring" width="100" height="100">
+                            <!-- Arkaplan dairesi -->
+                            <circle cx="50" cy="50" r="40" 
+                                    fill="transparent" 
+                                    stroke="rgba(255, 255, 255, 0.1)" 
+                                    stroke-width="8" />
+                            <!-- Progress dairesi -->
+                            <circle class="fluid-progress-circle" 
+                                    cx="50" cy="50" r="40" 
+                                    fill="transparent" 
+                                    stroke="url(#quality-gradient)" 
+                                    stroke-width="8" 
+                                    stroke-linecap="round"
+                                    stroke-dasharray="251.2"
+                                    stroke-dashoffset="calc(251.2 - (251.2 * 94) / 100)"
+                                    transform="rotate(-90 50 50)" />
+                            <!-- Gradient tanımı -->
+                            <defs>
+                                <linearGradient id="quality-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#0ea5e9" />
+                                    <stop offset="50%" stop-color="#3b82f6" />
+                                    <stop offset="100%" stop-color="#6366f1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        
+                        <!-- Ortadaki yüzde değeri -->
+                        <div class="fluid-progress-value">
+                            <span class="fluid-percentage">94%</span>
+                        </div>
+                        
+                        <!-- Halka içi glow efekti -->
+                        <div class="fluid-progress-glow glow-quality"></div>
+                    </div>
+                    
+                    <!-- Metrik bilgisi -->
+                    <div class="fluid-metric-info text-center mt-3">
+                        <div class="fluid-metric-label">
+                            <i class="fas fa-brain me-2 text-info"></i>
+                            <span class="fluid-label">Karar Kalitesi</span>
+                        </div>
+                        <p class="fluid-metric-desc small">
+                            Tahmin güvenilirliği
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+</div>
+        </div>
+        </div>
+    </div>
+    <div class="terminal-card glass-card-hover" data-aos="fade-left" data-aos-delay="300">
+    <div class="terminal_header">
+        <div class="terminal_title">
+            <i class="fas fa-terminal"></i>
+            <span>Developer Console</span>
+        </div>
+        <p class="terminal_subtitle">Ezgi Doğançukuru & Sude Naz İşci</p>
+    </div>
+    
+    <div class="terminal_container">
+        <div class="terminal_toolbar">
+            <div class="butt">
+                <button class="btn btn-color"></button>
+                <button class="btn"></button>
+                <button class="btn"></button>
+            </div>
+            <p class="user">ezgi@sude@dev:~</p>
+        </div>
+        
+        <div class="terminal_body">
+            <div class="terminal_message">
+                <span class="terminal_prompt">$</span>
+                <span class="terminal_text success">Welcome to Visitor's Journey</span>
+            </div>
+    
+            <div class="terminal_message">
+                <span class="terminal_prompt">>Ezgi Doğançukuru</span>
+                <span class="terminal_prompt">>Sude Naz İşci</span>
+            </div>
+  
+            <div class="terminal_message">
+                <span class="terminal_prompt">$</span>
+                <span class="terminal_text">Loading developer profiles...</span>
+            </div>
+            
+            <div class="terminal_message">
+                <span class="terminal_prompt">></span>
+                <span class="terminal_text success">
+    ✓ Ezgi Doğançukuru - <a href="https://github.com/ezgikaptan" target="_blank" class="github-link">github.com/ezgikaptan</a>
+</span>
+            </div>
+            
+            <div class="terminal_message">
+                <span class="terminal_prompt">></span>
+                <span class="terminal_text success">
+    ✓ Sude Naz İşci - <a href="https://github.com/sudenazisci" target="_blank" class="github-link">github.com/sudenazisci</a>
+</span>
+            </div>
+
+            
+            <div class="terminal_promt">
+                <span class="terminal_user">dev@visitorjourney:</span>
+                <span class="terminal_location">~/projects</span>
+                <span class="terminal_bling">$</span>
+                <span class="terminal_cursor"></span>
+            </div>
+            
+            <!-- Typewriter efekti -->
+            <div class="typewriter-container">
+                <div class="typewriter-line">
+                    <span class="typewriter-prompt">></span>
+                    <div class="typewriter-text" style="width: 320px;">
+                        System ready for customer behavior analysis...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="terminal_status">
+        <div class="status_indicator"></div>
+     
+        <div class="status_time" id="terminal-time">00:00:00</div>
+    </div>
+</div>
+
+    <!-- Result Modal -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content result-modal border-0">
+                <div class="modal-body p-0" id="result-content">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Footer -->
+    <footer class="footer-glass mt-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0 small">
+                        The Visitor's Journey | © <span id="current-year">2025</span> | 
+                        <span class="text-success">
+                            <i class="fas fa-circle fa-xs"></i> Sistem Çevrimiçi
+                        </span>
+                    </p>
+                </div>
+ 
+            </div>
+        </div>
+    </footer>
+    <div class="xmas-luxury-scene">
+        <div class="sky-stars"></div>
+        <div class="santa-crystal-group">
+            <div class="crystal-reindeer">
+                <i class="fas fa-thin fa-horse-head"></i>
+            </div>
+            <div class="glass-sleigh">
+                <span class="santa-emoji">🎅</span>
+                <i class="fas fa-sleigh"></i>
+            </div>
+        </div>
+
+        <div class="luxury-tree">
+            <div class="main-star"><i class="fas fa-star"></i></div>
+            <div class="tree-layers">
+                <div class="t-layer l-1"></div>
+                <div class="t-layer l-2"></div>
+                <div class="t-layer l-3"></div>
+                <div class="t-layer l-4"></div>
+            </div>
+            <div class="light-string">
+                <div class="bulb b1"></div>
+                <div class="bulb b2"></div>
+                <div class="bulb b3"></div>
+                <div class="bulb b4"></div>
+                <div class="bulb b5"></div>
+            </div>
+            <div class="tree-gifts">
+                <div class="gift g1"></div>
+                <div class="gift g2"></div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 20,
+            delay: 100
+        });
+
+        // Update year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Add typewriter effect to welcome text
+        const welcomeText = document.querySelector('.typewriter-text');
+        if (welcomeText) {
+            const text = welcomeText.textContent;
+            welcomeText.textContent = '';
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    welcomeText.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            typeWriter();
+        }
+    </script>
+    
+    
+</body>
+</html>

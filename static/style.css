@@ -1,0 +1,2197 @@
+/* static/style.css */
+
+:root {
+    /* Pastel Renk Palette */
+    --primary: #a78bfa;
+    --primary-dark: #8b5cf6;
+    --primary-light: #c4b5fd;
+    --secondary: #f9a8d4;
+    --accent: #67e8f9;
+    --accent-dark: #22d3ee;
+    --success: #86efac;
+    --warning: #fde68a;
+    --danger: #fca5a5;
+    --info: #bae6fd;
+    
+    /* Soft Dark Theme */
+    --bg-dark: #1e1b4b;
+    --bg-darker: #0f172a;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --bg-glass: rgba(255, 255, 255, 0.08);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    
+    /* Soft Gradients */
+    --gradient-primary: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+    --gradient-accent: linear-gradient(135deg, #67e8f9 0%, #a5f3fc 100%);
+    --gradient-success: linear-gradient(135deg, #86efac 0%, #bbf7d0 100%);
+    --gradient-dark: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    
+    /* Soft Effects */
+    --glow-primary: 0 0 30px rgba(167, 139, 250, 0.2);
+    --glow-accent: 0 0 25px rgba(103, 232, 249, 0.2);
+    --shadow-soft: 0 15px 35px rgba(0, 0, 0, 0.2);
+    --shadow-floating: 0 25px 50px rgba(0, 0, 0, 0.3);
+    
+    /* Font Sizes - Smaller */
+    --font-xs: 0.75rem;
+    --font-sm: 0.875rem;
+    --font-base: 0.95rem;
+    --font-lg: 1.125rem;
+    --font-xl: 1.25rem;
+    --font-2xl: 1.5rem;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: var(--font-base);
+    background-color: var(--bg-darker);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.5;
+}
+
+/* Animated Background Effects */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    overflow: hidden;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(167, 139, 250, 0.1), transparent);
+    animation: floatBubble 15s infinite linear;
+}
+
+.bubble:nth-child(1) {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 20s;
+}
+
+.bubble:nth-child(2) {
+    width: 200px;
+    height: 200px;
+    top: 60%;
+    right: 10%;
+    animation-delay: 5s;
+    animation-duration: 25s;
+    background: radial-gradient(circle at 30% 30%, rgba(103, 232, 249, 0.1), transparent);
+}
+
+.bubble:nth-child(3) {
+    width: 150px;
+    height: 150px;
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 10s;
+    animation-duration: 18s;
+    background: radial-gradient(circle at 30% 30%, rgba(249, 168, 212, 0.1), transparent);
+}
+
+@keyframes floatBubble {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-100px) rotate(180deg);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+        opacity: 0.3;
+    }
+}
+
+.grid-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -2;
+    opacity: 0.3;
+}
+
+/* Utility Classes */
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.glass-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(15px) saturate(180%);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.7s ease;
+}
+
+.glass-card:hover::before {
+    left: 100%;
+}
+
+.glass-card-hover:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: var(--shadow-floating), var(--glow-primary);
+    border-color: rgba(167, 139, 250, 0.3);
+}
+
+/* Header */
+.navbar-glass {
+    background: rgba(30, 27, 75, 0.7);
+    backdrop-filter: blur(20px) saturate(200%);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.01rem 0;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logo-icon {
+    width: 26px;
+    height: 26px;
+    background: var(--gradient-primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(167, 139, 250, 0.3);
+    animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 4px 15px rgba(167, 139, 250, 0.3); }
+    50% { box-shadow: 0 4px 25px rgba(167, 139, 250, 0.5); }
+}
+
+/* Stats Cards */
+.stat-badge {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.stat-badge:hover {
+    background: rgba(167, 139, 250, 0.1);
+    transform: translateY(-2px);
+}
+
+.stat-value {
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Form Elements */
+.glass-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    color: white;
+    padding: 0.7rem 1rem;
+    font-size: var(--font-sm);
+    transition: all 0.3s;
+}
+
+.glass-input:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.form-label {
+    color: var(--text-secondary);
+    font-size: var(--font-xs);
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+}
+
+/* Modern Slider */
+.range-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #475569, #64748b);
+    border-radius: 10px;
+    outline: none;
+    margin: 0.8rem 0;
+}
+
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    box-shadow: 0 0 20px var(--primary);
+    border: 3px solid var(--bg-darker);
+    transition: all 0.2s;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 25px var(--primary);
+}
+
+/* Buttons - Smaller */
+.btn-gradient {
+    background: var(--gradient-primary);
+    border: none;
+    color: white;
+    padding: 0.6rem 1.8rem;
+    border-radius: 14px;
+    font-weight: 500;
+    font-size: var(--font-sm);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--glow-primary);
+    color: white;
+}
+
+.btn-gradient::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-gradient:hover::after {
+    left: 100%;
+}
+
+/* AI Mascot */
+.ai-avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.2rem;
+    position: relative;
+}
+
+.ai-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(103, 232, 249, 0.3);
+    position: relative;
+    z-index: 2;
+    animation: float 6s ease-in-out infinite;
+}
+
+.ai-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130%;
+    height: 130%;
+    background: radial-gradient(circle, rgba(103, 232, 249, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 4s infinite;
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg);
+    }
+    33% { 
+        transform: translateY(-10px) rotate(3deg);
+    }
+    66% { 
+        transform: translateY(5px) rotate(-3deg);
+    }
+}
+
+/* Algorithm Cards - New Design */
+.algo-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 1.2rem;
+    transition: all 0.4s;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.algo-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+}
+
+.algo-card:hover::before {
+    transform: scaleX(1);
+}
+
+.algo-card:hover {
+    background: rgba(167, 139, 250, 0.08);
+    border-color: var(--primary);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(167, 139, 250, 0.1);
+}
+
+.algo-icon {
+    width: 45px;
+    height: 45px;
+    background: rgba(167, 139, 250, 0.1);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+}
+
+.algo-card:hover .algo-icon {
+    background: rgba(167, 139, 250, 0.2);
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Progress Rings */
+.progress-ring {
+    position: relative;
+    width: 90px;
+    height: 90px;
+}
+
+.progress-ring svg {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-circle {
+    fill: none;
+    stroke-width: 6;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1.5s ease-out;
+}
+
+.progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+/* Result Modal */
+.result-modal {
+    background: rgba(30, 27, 75, 0.95);
+    backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid var(--border-color);
+    border-radius: 28px;
+    box-shadow: var(--shadow-floating), 0 0 50px rgba(167, 139, 250, 0.2);
+    animation: modalSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.gauge-container {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+}
+
+.gauge-svg {
+    transform: rotate(-90deg);
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gauge-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.gauge-percent {
+    font-size: 2rem;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+}
+
+.gauge-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+/* Insight Cards */
+.insight-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-left: 3px solid var(--warning);
+    border-radius: 0 16px 16px 0;
+    padding: 1.2rem;
+    animation: slideInRight 0.6s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.insight-icon {
+    color: var(--warning);
+    font-size: 1rem;
+}
+
+/* Data Stream */
+.data-stream-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 0.8rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.data-stream-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient-accent);
+    transform: scaleY(0);
+    transition: transform 0.3s;
+}
+
+.data-stream-item:hover::before {
+    transform: scaleY(1);
+}
+
+.data-stream-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateX(8px);
+}
+
+.data-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 1.1rem;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Footer */
+.footer-glass {
+    background: rgba(30, 27, 75, 0.7);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-color);
+    padding: 1.2rem 0;
+    font-size: var(--font-sm);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.shimmer-text {
+    background: linear-gradient(90deg, #a78bfa, #c4b5fd, #a78bfa);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+}
+
+/* Particle Animation */
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: particleFloat 15s infinite linear;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    :root {
+        --font-base: 0.9rem;
+        --font-lg: 1rem;
+        --font-xl: 1.125rem;
+        --font-2xl: 1.25rem;
+    }
+    
+    .ai-avatar {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .gauge-container {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .gauge-percent {
+        font-size: 1.5rem;
+    }
+    
+    .glass-card {
+        border-radius: 20px;
+        padding: 1rem;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Typewriter Effect */
+.typewriter-text {
+    overflow: hidden;
+    border-right: 2px solid var(--primary);
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary) }
+}
+/* Davranış Analiz Modülü Kartı */
+.behavior-module-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(15px) saturate(180%);
+    border: 4px solid var(--text-primary);
+    border-radius: 12px;
+    box-shadow: 12px 12px 0 var(--text-primary);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.behavior-module-card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 17px 17px 0 var(--text-primary);
+}
+
+.card__title {
+    font-size: var(--font-2xl);
+    font-weight: 900;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 1px;
+}
+
+.card__title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 90%;
+    height: 3px;
+    background: var(--gradient-primary);
+    transform: translateX(-100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.behavior-module-card:hover .card__title::after {
+    transform: translateX(0);
+}
+
+.card__content {
+    font-size: var(--font-sm);
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.card__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card__form .input-group {
+    position: relative;
+}
+
+.card__form input {
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 3px solid var(--text-primary);
+    border-radius: 8px;
+    font-size: var(--font-sm);
+    font-family: inherit;
+    color: var(--text-primary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+}
+
+.card__form input:focus {
+    outline: none;
+    transform: scale(1.02);
+    background: rgba(167, 139, 250, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+}
+
+.card__form input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.card__button {
+    border: 3px solid var(--text-primary);
+    background: var(--text-primary);
+    color: var(--bg-darker);
+    padding: 0.8rem 1.5rem;
+    font-size: var(--font-base);
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+    width: 50%;
+    align-self: flex-start;
+}
+
+.card__button::before {
+    content: "Analiz Başlatılıyor!";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 700;
+}
+
+.card__button:hover::before {
+    transform: translateY(0);
+}
+
+.card__button:active {
+    transform: scale(0.95);
+}
+
+/* Form elemanları için ek stiller */
+.form-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.section-title i {
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+/* Range slider güncellemesi */
+.card__form .range-slider {
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-light), var(--primary));
+    margin: 1rem 0;
+    border-radius: 10px;
+}
+
+.card__form .range-slider::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+    border: 3px solid var(--text-primary);
+    background: var(--bg-darker);
+    box-shadow: 0 0 15px var(--primary);
+}
+
+.card__form .range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px var(--primary);
+}
+/* Terminal Kartı */
+.terminal-card {
+    position: relative;
+    background: rgba(30, 27, 75, 0.9);
+    border: 2px solid rgba(167, 139, 250, 0.3);
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin-top: 1rem;
+}
+
+.terminal_container {
+    width: 100%;
+    height: 250px;
+    background: #0a0a0f;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+.terminal_toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, #2d2b42, #1e1b4b);
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+.butt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-color {
+    background: #ff5f56;
+}
+
+.btn:nth-child(2) {
+    background: #ffbd2e;
+}
+
+.btn:nth-child(3) {
+    background: #27ca3f;
+}
+
+.btn:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+.user {
+    color: var(--primary-light);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.terminal_body {
+    padding: 15px;
+    height: calc(100% - 45px);
+    overflow-y: auto;
+    background: #0a0a0f;
+}
+
+.terminal_promt {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.terminal_user {
+    color: #67e8f9;
+    font-weight: 600;
+}
+
+.terminal_location {
+    color: #86efac;
+}
+
+.terminal_bling {
+    color: #f9a8d4;
+}
+
+.terminal_cursor {
+    width: 8px;
+    height: 17px;
+    background: var(--primary);
+    display: inline-block;
+    margin-left: 5px;
+    animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Terminal mesajları */
+.terminal_message {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.terminal_prompt {
+    color: var(--primary);
+    font-weight: 600;
+    min-width: 15px;
+}
+
+.terminal_text {
+    color: #e2e8f0;
+    flex: 1;
+}
+
+.terminal_text.success {
+    color: #86efac;
+}
+
+.terminal_text.warning {
+    color: #fde68a;
+}
+
+.terminal_text.info {
+    color: #67e8f9;
+}
+
+.terminal_text.error {
+    color: #fca5a5;
+}
+
+/* Scrollbar özelleştirme */
+.terminal_body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.terminal_body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.terminal_body::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+.terminal_body::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Header */
+.terminal_header {
+    padding: 15px 20px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.terminal_title {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.terminal_title i {
+    color: var(--primary);
+}
+
+.terminal_subtitle {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Typewriter efekti için */
+.typewriter-container {
+    position: relative;
+    margin-top: 10px;
+}
+
+.typewriter-line {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+    min-height: 20px;
+}
+
+.typewriter-prompt {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.typewriter-text {
+    color: #e2e8f0;
+    border-right: 2px solid var(--primary);
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* Status indicator */
+.terminal_status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(167, 139, 250, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status_indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    animation: pulse 2s infinite;
+}
+
+.status_text {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    flex: 1;
+}
+
+.status_time {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+.github-link {
+    color: inherit; /* Terminal metninin rengini (yeşil) korur */
+    text-decoration: none; /* Alt çizgiyi kaldırır */
+    font-weight: bold;
+    transition: all 0.2s ease;
+    border-bottom: 1px dashed #5ad641; /* Hafif bir alt çizgi efekti */
+}
+
+.github-link:hover {
+    color: #fff; /* Üzerine gelince beyaz olur */
+    background-color: #000; /* Arka planı siyah yapar (Brutalist etki) */
+    border-bottom: 1px solid #fff;
+}
+/* Algorithm Slider Container */
+/* Algorithm Slider Container */
+.algorithm-slider-container {
+    position: relative;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 24px;
+    background: rgba(30, 27, 75, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.algorithm-content {
+    max-width: 100%;
+    padding: 0 0 2rem 0;
+    text-align: center;
+}
+
+.algorithm-content h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.algorithm-content p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.algorithm-content button {
+    background: var(--gradient-primary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(167, 139, 250, 0.3);
+}
+
+.algorithm-content button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(167, 139, 250, 0.4);
+}
+
+/* Algorithm Slider Container - Center Alignment */
+.algorithm-swiper-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Algorithm Slider */
+.algorithm-swiper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.algorithm-swiper-slide {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    user-select: none;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.4s ease;
+    width: 300px !important; /* Sabit genişlik */
+    margin: 0 auto;
+}
+
+.algorithm-swiper-slide:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(167, 139, 250, 0.2);
+}
+
+.algorithm-cost {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 0.4rem 0.8rem;
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.algorithm-dark-text {
+    color: var(--bg-darker);
+}
+
+.algorithm-swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    transition: transform 0.5s ease;
+}
+
+.algorithm-swiper-slide:hover img {
+    transform: scale(1.05);
+}
+
+.algorithm-overlay {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 140px;
+    padding: 1rem 1.2rem;
+    background: linear-gradient(
+        to top,
+        rgba(30, 27, 75, 0.95),
+        rgba(30, 27, 75, 0.7)
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border-radius: 0 0 16px 16px;
+    z-index: 1;
+}
+
+.algorithm-overlay h1 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--text-primary);
+}
+
+.algorithm-overlay p {
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    margin-bottom: 0.8rem;
+}
+
+.algorithm-ratings {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+}
+
+.algorithm-stars {
+    display: flex;
+    gap: 2px;
+}
+
+.algorithm-star {
+    color: var(--warning);
+    font-size: 0.8rem;
+}
+
+.algorithm-ratings span {
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+}
+
+/* Particles Background */
+#algorithm-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Responsive */
+@media (max-width: 1050px) {
+    .algorithm-swiper {
+        height: 250px;
+    }
+    
+    .algorithm-swiper-slide {
+        width: 250px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .algorithm-slider-container {
+        padding: 1.5rem;
+    }
+    
+    .algorithm-swiper-container {
+        padding: 0 1rem;
+    }
+    
+    .algorithm-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .algorithm-swiper {
+        height: 220px;
+    }
+    
+    .algorithm-swiper-slide {
+        width: 220px !important;
+    }
+}
+
+@media (max-width: 470px) {
+    .algorithm-slider-container {
+        padding: 1rem;
+    }
+    
+    .algorithm-swiper-container {
+        padding: 0 0.5rem;
+    }
+    
+    .algorithm-swiper {
+        height: 200px;
+    }
+    
+    .algorithm-swiper-slide {
+        width: 200px !important;
+    }
+}
+
+/* Swiper Navigation */
+.swiper-button-next,
+.swiper-button-prev {
+    width: 40px !important;
+    height: 40px !important;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    color: var(--primary) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    top: 50% !important;
+    transform: translateY(-50%);
+}
+
+.swiper-button-next {
+    right: -1px !important;
+}
+
+.swiper-button-prev {
+    left: -1px !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 1.2rem !important;
+    font-weight: bold;
+}
+
+.swiper-pagination {
+    position: relative !important;
+    margin-top: 1.5rem;
+    bottom: 0 !important;
+}
+
+.swiper-pagination-bullet {
+    background: var(--text-secondary) !important;
+    opacity: 0.5;
+    width: 8px !important;
+    height: 8px !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--primary) !important;
+    opacity: 1;
+}
+
+/* Center alignment for swiper */
+.swiper-container {
+    padding: 0 40px !important;
+}
+
+/* Media query for mobile navigation buttons */
+@media (max-width: 768px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none !important;
+    }
+    
+    .swiper-container {
+        padding: 0 20px !important;
+    }
+}
+
+/* Center slides */
+.swiper-slide {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+/* Container & Placement */
+.hanging-card-container {
+    position: fixed;
+    top: -20px; /* İpin başlangıcını gizlemek için biraz yukarı aldık */
+    right: 5px;
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+/* Sallanma Animasyonu */
+@keyframes swing {
+    0% { transform: rotate(-1.5deg); }
+    50% { transform: rotate(1.5deg); }
+    100% { transform: rotate(-1.5deg); }
+}
+
+/* Kart Tasarımı (Küçültülmüş) */
+.ai-id-card {
+    width: 150px; /* Genişlik küçültüldü */
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 8px 1px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    text-align: center;
+    position: relative;
+    transform-origin: top center;
+    animation: swing 4s ease-in-out infinite;
+    border: 1px solid rgba(255,255,255,0.8);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    pointer-events: auto;
+    
+}
+
+/* Hover Efekti: Üzerine gelince büyüme ve hızlanma */
+.ai-id-card:hover {
+    transform: scale(1.08); /* Hafif büyüme */
+    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+    animation: swing 1s ease-in-out infinite; /* Sallanma hızlanır */
+    border-color: #3b82f6;
+}
+
+/* Lanyard - İp Yapısı */
+.lanyard-rope {
+    width: 10px;
+    height: 80px; /* İp boyu kısaltıldı */
+    background: linear-gradient(90deg, #0f172a, #334155, #0f172a);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+}
+
+.lanyard-clip {
+    width: 3px;
+    height: 12px;
+    background: #94a3b8;
+    margin: -1px auto;
+}
+
+.card-top-hole {
+    width: 25px;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    margin: -5px auto 10px auto;
+}
+
+/* Avatar Ayarları */
+.ai-avatar-container {
+    position: relative;
+    width: 55px; /* Avatar küçültüldü */
+    height: 55px;
+    margin: 0 auto 10px;
+}
+
+.ai-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #3b82f6;
+    background: #f8fafc;
+}
+
+/* Yazı Alanları */
+.card-title-mini {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.status-badge {
+    font-size: 9px;
+    color: #3b82f6;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    background: #3b82f6;
+    border-radius: 50%;
+    animation: dot-pulse 1.5s infinite;
+}
+
+@keyframes dot-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.small-text-mini {
+    font-size: 10px;
+    color: #64748b;
+    margin-top: 5px;
+    line-height: 1.2;
+}
+
+.card-footer-mini {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #f1f5f9;
+    font-size: 8px;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+}
+/* Fluid Glass Tasarımı CSS */
+.fluid-glass-card {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fluid-glass-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 
+        0 12px 40px rgba(59, 130, 246, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.fluid-glass-inner {
+    position: relative;
+    z-index: 2;
+}
+
+.fluid-glass-bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.fluid-bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.2), transparent 70%);
+    filter: blur(10px);
+    animation: floatBubble 15s infinite ease-in-out;
+}
+
+.bubble-1 {
+    width: 80px;
+    height: 80px;
+    top: -20px;
+    right: -20px;
+    animation-delay: 0s;
+}
+
+.bubble-2 {
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    left: -15px;
+    background: radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.15), transparent 70%);
+    animation-delay: 5s;
+}
+
+.bubble-3 {
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    right: 30px;
+    background: radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.1), transparent 70%);
+    animation-delay: 10s;
+}
+
+@keyframes floatBubble {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.1); }
+}
+
+.fluid-icon-container {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #22c55e, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.5rem;
+}
+
+.fluid-title {
+    background: linear-gradient(90deg, #ffffff, #cbd5e1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+}
+
+.fluid-metric-card {
+    position: relative;
+    z-index: 2;
+}
+
+.fluid-progress-ring-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.fluid-progress-ring {
+    transform: rotate(0deg);
+    transition: transform 1s ease;
+}
+
+.fluid-progress-circle {
+    transition: stroke-dashoffset 1.5s ease;
+}
+
+.fluid-progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.fluid-percentage {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.fluid-progress-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    filter: blur(15px);
+    opacity: 0.5;
+    z-index: -1;
+    animation: pulseGlow 2s infinite alternate;
+}
+
+.glow-accuracy {
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.3), transparent 70%);
+}
+
+.glow-quality {
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.3), transparent 70%);
+}
+
+@keyframes pulseGlow {
+    0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.9); }
+    100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+}
+
+.fluid-metric-info {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.fluid-metric-info:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px);
+}
+
+.fluid-metric-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.fluid-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #e2e8f0;
+}
+
+.fluid-metric-desc {
+    color: #94a3b8;
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Responsive ayarlar */
+@media (max-width: 768px) {
+    .fluid-progress-ring-container {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .fluid-percentage {
+        font-size: 1.2rem;
+    }
+    
+    .fluid-progress-glow {
+        width: 100px;
+        height: 100px;
+    }
+}
+/* Ana Kart Konteyneri Ayarı */
+.fluid-glass-card {
+    position: relative;
+    padding: 2px; /* Kenarlık kalınlığı */
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    overflow: hidden; /* Dışarı taşan ışığı kesmek için */
+    z-index: 1;
+}
+
+/* Hareketli Kenarlık Işığı (Pattern) */
+.fluid-glass-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        transparent, 
+        rgba(59, 130, 246, 0.8), /* Mavi */
+        rgba(139, 92, 246, 0.8), /* Mor */
+        transparent 30%
+    );
+    animation: rotatePattern 4s linear infinite;
+    z-index: -2;
+}
+
+/* Kartın İç Yüzeyi (Işığın üstünde durması için) */
+.fluid-glass-card .fluid-glass-inner {
+    position: relative;
+    background: rgba(15, 23, 42, 0.95); /* Koyu arka plan */
+    border-radius: 22px;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    backdrop-filter: blur(20px);
+}
+
+/* Kartın en arkasına hafif bir gölge/glow eklemek için */
+.fluid-glass-card::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 22px;
+    z-index: -1;
+}
+
+/* Dönme Animasyonu */
+@keyframes rotatePattern {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hover durumunda hızı artır veya parlamayı güçlendir */
+.fluid-glass-card:hover::before {
+    animation-duration: 2s;
+    background: conic-gradient(
+        transparent, 
+        #3b82f6, 
+        #8b5cf6, 
+        #22c55e,
+        transparent 40%
+    );
+}
+/* Stepper Konteyner */
+.custom-stepper {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 4px;
+    transition: all 0.3s ease;
+}
+
+.custom-stepper:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Input Alanı */
+.stepper-input {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    width: 60px;
+    margin: 0 5px;
+}
+
+/* Tarayıcı oklarını tamamen gizle */
+.stepper-input::-webkit-inner-spin-button,
+.stepper-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Modern Butonlar */
+.stepper-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    color: #60a5fa;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.stepper-btn:hover {
+    background: #3b82f6;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.stepper-btn:active {
+    transform: translateY(0);
+}
+
+/* İkon Boyutu */
+.stepper-btn i {
+    font-size: 0.8rem;
+}
+
+.xmas-luxury-scene {
+
+    position: fixed !important;
+
+    bottom: 10px;
+
+    right: 40px;
+
+    z-index: 1111;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    pointer-events: none;
+
+    transform: scale(0.5);       /* 🔽 KÜÇÜLTME */
+    transform-origin: bottom right;
+
+}
+
+
+
+/* Gerçekçi Ağaç Katmanları */
+
+.luxury-tree {
+
+    position: relative;
+
+    width: 150px;
+
+    height: 220px;
+
+}
+
+
+
+.t-layer {
+
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 0; height: 0;
+
+    border-left: transparent solid;
+
+    border-right: transparent solid;
+
+    border-bottom: solid;
+
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+
+}
+
+
+
+.l-1 { bottom: 120px; border-width: 0 40px 60px 40px; border-bottom-color: #065f46; z-index: 4; }
+
+.l-2 { bottom: 85px; border-width: 0 60px 80px 60px; border-bottom-color: #064e3b; z-index: 3; }
+
+.l-3 { bottom: 50px; border-width: 0 80px 100px 80px; border-bottom-color: #043a2b; z-index: 2; }
+
+.l-4 { bottom: 15px; border-width: 0 100px 120px 100px; border-bottom-color: #022c22; z-index: 1; }
+
+
+
+/* Altın Yıldız */
+
+.main-star {
+
+    position: absolute;
+
+    top: -10px; left: 50%;
+
+    transform: translateX(-50%);
+
+    color: #fcd34d;
+
+    font-size: 30px;
+
+    text-shadow: 0 0 20px #fbbf24, 0 0 40px #f59e0b;
+
+    z-index: 10;
+
+    animation: starPulse 2s infinite alternate;
+
+}
+
+
+
+/* Noel Baba ve Geyik (Cam Efekti) */
+
+.santa-crystal-group {
+
+    display: flex;
+
+    align-items: center;
+
+    margin-right: -30px;
+
+    margin-bottom: 20px;
+
+    animation: floating 3s ease-in-out infinite;
+
+    z-index: 5;
+
+}
+
+
+
+.crystal-reindeer {
+
+    color: rgba(255, 255, 255, 0.8);
+
+    font-size: 25px;
+
+    filter: drop-shadow(0 0 10px #3b82f6);
+
+}
+
+
+
+.glass-sleigh {
+
+    background: rgba(255, 255, 255, 0.1);
+
+    backdrop-filter: blur(5px);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    padding: 10px;
+
+    border-radius: 15px;
+
+    color: #ef4444;
+
+    font-size: 30px;
+
+    position: relative;
+
+}
+
+
+
+.santa-emoji {
+
+    position: absolute;
+
+    top: -15px; left: 10px;
+
+    font-size: 20px;
+
+}
+
+
+
+/* Neon Işıklar */
+
+.bulb {
+
+    position: absolute;
+
+    width: 10px; height: 10px;
+
+    border-radius: 50%;
+
+    z-index: 6;
+
+    animation: glow 1s infinite alternate;
+
+}
+
+
+
+.b1 { top: 100px; left: 60px; background: #ff4444; box-shadow: 0 0 15px #ff4444; }
+
+.b2 { top: 140px; left: 40px; background: #44ff44; box-shadow: 0 0 15px #44ff44; animation-delay: 0.2s; }
+
+.b3 { top: 160px; left: 100px; background: #4444ff; box-shadow: 0 0 15px #4444ff; animation-delay: 0.4s; }
+
+.b4 { top: 80px; left: 85px; background: #ffff44; box-shadow: 0 0 15px #ffff44; animation-delay: 0.6s; }
+
+
+
+/* Animasyonlar */
+
+@keyframes starPulse {
+
+    from { transform: translateX(-50%) scale(1); filter: brightness(1); }
+
+    to { transform: translateX(-50%) scale(1.2); filter: brightness(1.5); }
+
+}
+
+
+
+@keyframes floating {
+
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+
+    50% { transform: translateY(-15px) rotate(3deg); }
+
+}
+
+
+
+@keyframes glow {
+
+    from { opacity: 0.5; transform: scale(0.8); }
+
+    to { opacity: 1; transform: scale(1.1); }
+
+}  
+
